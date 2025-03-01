@@ -12,7 +12,7 @@
     ],
     "paths": {
       "~encore/*": [
-        "services/encore.gen/*"
+        "./services/encore.gen/*"
       ]
     },
     /* Workspace Settings */

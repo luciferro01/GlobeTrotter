@@ -1,2 +1,1 @@
-export { get } from "../../../../hello/hello.js";
-
+export { get } from "../../../../../hello/hello.js";

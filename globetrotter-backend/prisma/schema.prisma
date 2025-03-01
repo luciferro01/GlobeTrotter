@@ -24,7 +24,7 @@ model Destination {
   id           String        @id @default(uuid())
   city         String
   country      String
-  clues        Json          // Store as JSON array of strings
+  clues        Json           // Store as JSON array of strings
   funFact      Json          // Store as JSON array of strings
   trivia       Json          // Store as JSON array of strings
   imageUrl     String?       // Optional image-based clue
