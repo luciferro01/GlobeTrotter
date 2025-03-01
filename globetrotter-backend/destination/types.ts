@@ -1,14 +1,11 @@
-// import { JsonArray } from "@prisma/client/runtime/library";
 import { CommonResponse } from "../services/shared/types";
-
-export type JsonArray = any[];
 
 export interface CreateDestinationDto {
   city: string;
   country: string;
-  clues: JsonArray;
-  funFact: JsonArray;
-  trivia: JsonArray;
+  clues: string[];
+  funFact: string[];
+  trivia: string[];
   imageUrl?: string;
 }
 
@@ -16,9 +13,9 @@ export interface GetDestinationDto {
   id: string;
   city: string;
   country: string;
-  clues: JsonArray;
-  funFact: JsonArray;
-  trivia: JsonArray;
+  clues: string[];
+  funFact: string[];
+  trivia: string[];
   imageUrl?: string;
   createdAt: Date;
 }
@@ -26,9 +23,9 @@ export interface GetDestinationDto {
 export interface UpdateDestinationDto {
   city?: string;
   country?: string;
-  clues?: JsonArray;
-  funFact?: JsonArray;
-  trivia?: JsonArray;
+  clues?: string[];
+  funFact?: string[];
+  trivia?: string[];
   imageUrl?: string;
 }
 

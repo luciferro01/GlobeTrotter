@@ -24,9 +24,9 @@ model Destination {
   id           String        @id @default(uuid())
   city         String
   country      String
-  clues        Json           // Store as JSON array of strings
-  funFact      Json          // Store as JSON array of strings
-  trivia       Json          // Store as JSON array of strings
+  clues        String[]          
+  funFact      String[]          
+  trivia       String[]          
   imageUrl     String?       // Optional image-based clue
   createdAt    DateTime      @default(now())
   gameSessions GameSession[]
@@ -35,13 +35,13 @@ model Destination {
 model GameSession {
   id              String       @id @default(uuid())
   userId          String?      // Nullable for anonymous users
-  destinationId   String
+  destinationId   String     // Array of destination IDs   
   score           Int          @default(0)
   wrongAnswers    Int          @default(0)
   status          String       @default("in_progress") // e.g., 'in_progress', 'completed'
   startTime       DateTime     @default(now())
   endTime         DateTime?    // Defined if using a timer-based session
-  maxWrongAnswers Int          @default(3)
+  maxWrongAnswers Int          @default(2)
   updatedAt       DateTime     @updatedAt
 
   user            User?        @relation(fields: [userId], references: [id])
