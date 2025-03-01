@@ -1,0 +1,2 @@
+
+    "postinstall": "npx prisma generate --schema=users/prisma/schema.prisma"
