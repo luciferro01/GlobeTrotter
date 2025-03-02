@@ -28,6 +28,14 @@ export interface UpdateDestinationDto {
   trivia?: string[];
   imageUrl?: string;
 }
+export interface BulkCreateDestinationDto {
+  destinations: CreateDestinationDto[];
+}
 
+export interface BulkDestinationResponse
+  extends CommonResponse<{
+    created: number;
+    failed: number;
+  }> {}
 export interface DestinationResponse
   extends CommonResponse<CreateDestinationDto | null> {}

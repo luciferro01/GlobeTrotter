@@ -1,5 +1,7 @@
 import { api, APIError, ErrCode, Query } from "encore.dev/api";
 import {
+  BulkCreateDestinationDto,
+  BulkDestinationResponse,
   CreateDestinationDto,
   DestinationResponse,
   UpdateDestinationDto,
@@ -53,6 +55,18 @@ export const random = api(
       return result;
     } catch (error) {
       throw new APIError(ErrCode.NotFound, "Destination not found");
+    }
+  }
+);
+
+export const bulkCreate = api(
+  { expose: true, method: "POST", path: "/destinations/bulk", auth: false },
+  async (data: BulkCreateDestinationDto): Promise<BulkDestinationResponse> => {
+    try {
+      const result = await DestinationService.bulkCreate(data);
+      return result;
+    } catch (error) {
+      throw new APIError(ErrCode.Internal, "Failed to import destinations");
     }
   }
 );
