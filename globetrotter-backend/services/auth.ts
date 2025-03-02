@@ -1,17 +1,13 @@
 import { APIError, Gateway, Header } from "encore.dev/api";
 import { authHandler } from "encore.dev/auth";
 import { prisma } from "../database";
+import jwt from "jsonwebtoken";
 
 interface AuthParams {
   authorization: Header<"Authorization">;
 }
 interface AuthResponse {
   userID: string;
-  // status: "success";
-  // user: {
-  //   id: string;
-  //   userName: string;
-  // };
 }
 
 export const myAuthHandler = authHandler<AuthParams, AuthResponse>(
@@ -25,9 +21,12 @@ export const myAuthHandler = authHandler<AuthParams, AuthResponse>(
     }
 
     try {
+      //decode token
+      const userId = jwt.decode(token) as string;
+
       //verify token with jsonwebtoken
       const user = await prisma.user.findUnique({
-        where: { id: token },
+        where: { id: userId },
       });
       if (!user) {
         throw APIError.unauthenticated("invalid token");
