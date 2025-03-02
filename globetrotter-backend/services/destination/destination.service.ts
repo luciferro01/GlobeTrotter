@@ -1,5 +1,5 @@
-import { prisma } from "../database";
-import { CommonResponse } from "../services/shared/types";
+import { prisma } from "../../database";
+import { CommonResponse } from "../shared/types";
 import {
   CreateDestinationDto,
   DestinationResponse,

@@ -1,5 +1,5 @@
 import { env } from "process";
-import { prisma } from "../database";
+import { prisma } from "../../database";
 import { LoginResponse, RegisterUserDto, UserResponse } from "./user.types";
 import jwt from "jsonwebtoken";
 // In a real-world app, move this to environment variables

@@ -1,6 +1,6 @@
 import { APIError, Gateway, Header } from "encore.dev/api";
 import { authHandler } from "encore.dev/auth";
-import { prisma } from "../database";
+import { prisma } from "../../database";
 import jwt from "jsonwebtoken";
 
 interface AuthParams {

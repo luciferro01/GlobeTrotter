@@ -1,5 +1,5 @@
 import { Header } from "encore.dev/api";
-import { CommonResponse } from "../services/shared/types";
+import { CommonResponse } from "../shared/types";
 
 export interface RegisterUserDto {
   userName: string;

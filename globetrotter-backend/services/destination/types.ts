@@ -1,4 +1,4 @@
-import { CommonResponse } from "../services/shared/types";
+import { CommonResponse } from "../shared/types";
 
 export interface CreateDestinationDto {
   city: string;
