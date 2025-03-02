@@ -1,7 +1,9 @@
-import { APIError, Gateway, Header } from "encore.dev/api";
+import { APIError, ErrCode, Gateway, Header } from "encore.dev/api";
 import { authHandler } from "encore.dev/auth";
 import { prisma } from "../../database";
 import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET || "globetrotter-secret-key";
 
 interface AuthParams {
   authorization: Header<"Authorization">;
@@ -21,13 +23,13 @@ export const myAuthHandler = authHandler<AuthParams, AuthResponse>(
     }
 
     try {
-      //decode token
-      const userId = jwt.decode(token) as string;
+      const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
 
-      //verify token with jsonwebtoken
+      // Verify user exists
       const user = await prisma.user.findUnique({
-        where: { id: userId },
+        where: { id: decoded.userId },
       });
+
       if (!user) {
         throw APIError.unauthenticated("invalid token");
       }
@@ -41,3 +43,11 @@ export const myAuthHandler = authHandler<AuthParams, AuthResponse>(
 export const gateway = new Gateway({
   authHandler: myAuthHandler,
 });
+
+// Helper to get user ID from request
+export const getUserId = (req: any): string => {
+  if (!req.auth?.userID) {
+    throw new APIError(ErrCode.Unauthenticated, "Not authenticated");
+  }
+  return req.auth.userID;
+};
